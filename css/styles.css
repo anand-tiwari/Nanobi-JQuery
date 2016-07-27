@@ -18,16 +18,21 @@ tr td{
 
 .right {
     float: right;
-    margin: 25px 122px 0px 22px;
+    margin: 9px 100px 0px 0px;
 }
 
 .ui-widget-header,.ui-state-default, ui-button{
             background:#b9cd6d;
             border: 1px solid #b9cd6d;
             color: #FFFFFF;
-            font-weight: bold;
+            font-weight: bold; 
             
 }
+.ui-widget-header{
+    border: 1px solid #8CBEE1 !important;
+    background: #8CBEE1 url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x !important;
+}
+
 .sales_value{
     text-align: center;
     position: relative;
