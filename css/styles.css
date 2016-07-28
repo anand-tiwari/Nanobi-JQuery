@@ -17,8 +17,8 @@ tr td{
 }
 
 .right {
-    float: right;
-    margin: 9px 100px 0px 0px;
+    float: left;
+    margin: 10px 0px 0px 0px;
 }
 
 .ui-widget-header,.ui-state-default, ui-button{
@@ -29,9 +29,18 @@ tr td{
             
 }
 .ui-widget-header{
-    border: 1px solid #8CBEE1 !important;
-    background: #8CBEE1 url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x !important;
+    border: 1px solid #B6DEEF !important;
+    background: #B6DEEF url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x !important;
 }
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    border: 6px solid #f6f6f6 !important;
+    background: #B6DEEF url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x !important;
+    font-weight: bold;
+    color: #1c94c4;
+    border-radius: 23px !important;
+}
+
 
 .sales_value{
     text-align: center;
@@ -51,6 +60,10 @@ canvas{
 table>tbody>tr>td, table>tbody>tr>th, table>tfoot>tr>td, table>tfoot>tr>th, table>thead>tr>td, table>thead>tr>th {
     padding: 5px !important;
     font-size: 20px !important;
+}
+.table{
+    float: left !important;
+    width: 38% !important;
 }
 
 table {

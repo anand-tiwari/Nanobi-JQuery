@@ -34,17 +34,6 @@ $(document).ready(function() {
 
             //----------------- Handle events of changing the Product Category ------------------------------------------------//
             $('.productCategory').on('change', function() {
-                var $that = $(this);
-                $('.personDataTable').empty();
-                $.each(obj, function(i, v) {
-                    if ($that.val() == v.Product) {
-                        var row = $('<tr class="opener" value=" ' + v.Sale + ' "></tr>');
-                        $(".personDataTable").append(row);
-                        row.append($("<td>" + v.State + "</td>"));
-                        row.append($("<td>" + v.Sale + "</td>"));
-                        row.append($("<td>" + v.Date + "</td>"));
-                    }
-                });
                 dateRangeFilter();
             }).change();
         }
@@ -60,41 +49,45 @@ $(document).ready(function() {
         modal: true,
     });
     //------------------  Handle on click events of rows in tables --------------------------------------------------//
+    var opts = {
+        angle: 0.10, // The length of each line
+        lineWidth: 0.14, // The line thickness
+        colorStart: '#5CABD3',   // Colors
+        colorStop: '#7FBDDC',    // just experiment with them
+        strokeColor: '#d3d9df',   // to see which ones work best for you
+    };
     $('.personDataTable').on('click', '.opener', function(e) {
         var mi = parseInt($(this).attr("value"));
         $('.sales_value').html("Rs"+mi);
         mi = 110 - parseInt(mi % 100);
         $(".dialog").dialog("open");
         var gaugeOneTarget = document.getElementById('gaugeOne');
-        var gaugeOne = new Donut(gaugeOneTarget);
+        var gaugeOne = new Donut(gaugeOneTarget).setOptions(opts);
         gaugeOne.maxValue = 100;
         gaugeOne.set(mi);
-
-        var gaugeTwoTarget = document.getElementById('gaugeTwo');
-        var gaugeTwo = new Gauge(gaugeTwoTarget);
-        gaugeTwo.maxValue = 100;
-        gaugeTwo.set(mi);
     });   
 
     //--------------------------  Filter data between two selected Dates Ranges -----------------------------------------------//
     function dateRangeFilter() {
         var from = new Date($("#slider-range").slider("values", 0) * 1000).toDateString();
         var to = new Date($("#slider-range").slider("values", 1) * 1000).toDateString();
-        var jo = $(".personDataTable").find("tr");
-        if (this.value == "") {
-            jo.show();
-            return;
-        }
-        jo.hide();
-        jo.filter(function(i, v) {
-            var $t = new Date($(this).find('td:eq(2)').html()).toDateString();
-            var selectedDate = moment($t).format('YYYY-MM-DD');
-            var startDate = moment(from).format('YYYY-MM-DD');
-            var endDate = moment(to).format('YYYY-MM-DD');
-            return !(moment(selectedDate).isBefore(startDate)) && !(moment(selectedDate).isAfter(endDate));
-        }).show();
-    }
+        
+        var startDate = moment(from).format('YYYY-MM-DD');
+        var endDate = moment(to).format('YYYY-MM-DD');
 
+         var $that = $('.productCategory');
+                $('.personDataTable').empty();
+                $.each(obj, function(i, v) {
+                    var t = new Date(v.Date).toDateString();
+                    var selectedDate = moment(t).format('YYYY-MM-DD');
+                    if ($that.val() == v.Product && ( !(moment(selectedDate).isBefore(startDate)) && !(moment(selectedDate).isAfter(endDate)) )) {
+                        var row = $('<tr class="opener" value=" ' + v.Sale + ' "></tr>');
+                        $(".personDataTable").append(row);
+                        row.append($("<td>" + v.State + "</td>"));
+                        row.append($("<td>" + v.Sale + "</td>"));
+                    }
+        });
+    }
     //--------------------- slider for date range selector -----------------------------------------------------------------//
     $("#slider-range").slider({
         range: true,
