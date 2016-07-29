@@ -4,7 +4,7 @@ $(document).ready(function() {
     //------------------ Ajax Call and GET Json Response ------------------------------------------------------//
     $.ajax({
         "type": 'GET',
-        //            "url": "http://nbvmpoc.cloudapp.net:81/contentserver/services/content/analytics/an8e8ee334-08ce-4fef-bbdb-798f7b1b6bf5/json?t=930d0d51-9765-4787-bfe8-9770e3afa053",
+//                    "url": "http://nbvmpoc.cloudapp.net:81/contentserver/services/content/analytics/an8e8ee334-08ce-4fef-bbdb-798f7b1b6bf5/json?t=930d0d51-9765-4787-bfe8-9770e3afa053",
         "url": "data.json",
         "cache": 'false',
         "dataType": "json",
@@ -83,8 +83,11 @@ $(document).ready(function() {
                     if ($that.val() == v.Product && ( !(moment(selectedDate).isBefore(startDate)) && !(moment(selectedDate).isAfter(endDate)) )) {
                         var row = $('<tr class="opener" value=" ' + v.Sale + ' "></tr>');
                         $(".personDataTable").append(row);
+                        row.append($("<td>" + v.Product + "</td>"));
                         row.append($("<td>" + v.State + "</td>"));
                         row.append($("<td>" + v.Sale + "</td>"));
+                        row.append($("<td>" + v.Date + "</td>"));
+                        
                     }
         });
     }
